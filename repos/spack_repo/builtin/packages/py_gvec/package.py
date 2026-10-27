@@ -57,7 +57,8 @@ class PyGvec(PythonPackage):
         depends_on("py-xarray")
 
     def config_settings(self, spec, prefix):
-        return {
+        settings = {}
+        if spec.satisfies("@1.5.1:"):
             # let spack handle architecture-specific flags
-            "cmake.define.GVEC_ADD_COMPILE_FLAGS_MACHINE": "",
-        }
+            settings["cmake.define.GVEC_ADD_COMPILE_FLAGS_MACHINE"] = ""
+        return settings
